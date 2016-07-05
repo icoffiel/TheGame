@@ -6,7 +6,7 @@ class App {
 
   start() {
     let points = new Points();
-    points.getPoints();
+    points.getPointsRunner();
   }
 }
 

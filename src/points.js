@@ -19,7 +19,7 @@ class Points {
   }
 
   getPoints() {
-    rp(this.points)
+    return rp(this.points)
       .then(parsedBody => {
         console.log(util.inspect(parsedBody, false, null));
         if(parsedBody.Item !== null){
@@ -33,9 +33,13 @@ class Points {
       })
       .catch(err => {
         console.log(err);
-      })
+      });
+  }
+
+  getPointsRunner() {
+    this.getPoints()
       .finally(() => {
-        setTimeout(() => this.getPoints(), TIMEOUT);
+        setTimeout(() => this.getPointsRunner(), TIMEOUT);
       });
   }
 
