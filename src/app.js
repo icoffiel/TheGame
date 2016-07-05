@@ -1,12 +1,15 @@
 let Points = require('./Points');
+let LeaderBoard = require('./LeaderBoard');
 
 class App {
   constructor() {
+    this.points = new Points();
+    this.leaderBoard = new LeaderBoard();
   }
 
   start() {
-    let points = new Points();
-    points.getPointsRunner();
+    this.points.getPointsRunner();
+    this.leaderBoard.getLeaderBoardRunner();
   }
 }
 
