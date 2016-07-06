@@ -2,7 +2,7 @@ var rp = require('request-promise');
 var util = require('util');
 var Items = require('./Items');
 
-const TIMEOUT = 1000;
+const TIMEOUT = 1100;
 
 class Points {
 
@@ -14,6 +14,7 @@ class Points {
       headers: {
         'apikey': '82af0283-6a48-4398-82c0-4cbc0217dc66'
       },
+      timeout: 60000,
       json: true
     };
   }
