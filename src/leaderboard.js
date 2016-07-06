@@ -7,6 +7,7 @@ class LeaderBoard {
       headers: {
         'Accept': 'application/json'
       },
+      timeout: 120000,
       json: true
     };
 
@@ -17,15 +18,11 @@ class LeaderBoard {
     return this._leaderBoard;
   }
 
-  set leaderBoard(newLeaderBoard) {
-    this._leaderBoard = newLeaderBoard;
-  }
-
   retrieveLeaderBoard() {
     return rp.get(this.leaderBoardOpts)
       .then(parsedBody => {
         console.log('Retrieved leaderboard!');
-        this.leaderBoard = parsedBody;
+        this._leaderBoard = parsedBody;
       })
       .catch(err => {
         console.log(err);
@@ -35,8 +32,17 @@ class LeaderBoard {
   getLeaderBoardRunner() {
     this.retrieveLeaderBoard()
       .finally(() => {
-        setTimeout(() => this.getLeaderBoardRunner(), 30000);
+        setTimeout(() => this.getLeaderBoardRunner(), 60000);
       });
+  }
+
+  getTarget() {
+    // TODO Implement JVM filter
+    if(this._leaderBoard) {
+        return this._leaderBoard[0].PlayerName;
+    } else {
+      return null;
+    }
   }
 }
 

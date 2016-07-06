@@ -3,14 +3,20 @@ var util = require('util');
 
 const URL_USE_ITEMS = "http://thegame.nerderylabs.com/items/use/";
 
+const ATTACK_ITEMS = [
+
+]
+
 class Items {
-  constructor() {
+  constructor(leaderBoardUtil) {
     this.db = new PouchDB('../items', { db: require('sqldown') });
-    console.log('Here!');
     this.getAllItems()
       .then(response => {
-        console.log(util.inspect(response, false, null));
+        console.log('Retrieved Items from the db');
+        this._allItems = response;
       });
+
+    this.leaderBoard = leaderBoardUtil;
   }
 
   saveItem(item) {
@@ -48,6 +54,14 @@ class Items {
     .catch(err => {
       console.log(err);
     });
+  }
+
+  getUseItemRunner() {
+    // TODO Only automate lower level items?
+    setTimeout(() => {
+      console.log(this._allItems.rows.shift().doc.Name);
+      console.log(this.leaderBoard.getTarget());
+    }, 1000);
   }
 }
 
