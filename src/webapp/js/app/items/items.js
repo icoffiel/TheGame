@@ -23,7 +23,7 @@ class ItemController {
   getAllItemsPoller() {
     this.getAllItems()
     .finally(() => {
-      setTimeout(() => this.getAllItemsPoller(), 2000);
+      setTimeout(() => this.getAllItemsPoller(), 10000);
     });
   }
 
@@ -44,6 +44,18 @@ class ItemController {
       .error((err) => {
         console.log(err);
       });
+  }
+
+  search(criteria) {
+    return (item => {
+      if(criteria) {
+        let criteriaArray = criteria.toLowerCase().split(',');
+        let trimmedArray = criteriaArray.map(row => row.trim());
+        return trimmedArray.filter(row => item.doc.Name.toLowerCase().includes(row) && row.length).length;
+      } else {
+        return true;
+      }
+    });
   }
 }
 

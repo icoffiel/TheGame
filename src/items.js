@@ -1,6 +1,7 @@
 var PouchDB = require('pouchdb');
 var util = require('util');
 var rp = require('request-promise');
+let config = require('../config/api');
 
 const URL_USE_ITEMS = "http://thegame.nerderylabs.com/items/use/";
 
@@ -10,12 +11,9 @@ const ATTACK_ITEMS = [
 
 class Items {
   constructor(leaderBoardUtil) {
-    this.db = new PouchDB('../items', { db: require('sqldown') });
-    this._allItems = [];
+    this.db = new PouchDB('./db/items.db', { db: require('sqldown') });
 
     this.leaderBoard = leaderBoardUtil;
-
-    this.getAllItemsRunner();
   }
 
   saveItem(item) {
@@ -34,18 +32,6 @@ class Items {
     });
   }
 
-  getAllItemsRunner() {
-    this.getAllItems()
-    .then(response => {
-      this._allItems = response;
-      setTimeout(() => this.getAllItemsRunner(), 2000);
-    })
-    .catch((err) => {
-      console.log(err);
-      setTimeout(() => this.getAllItemsRunner(), 2000);
-    });
-  }
-
   useItem(docId, itemId, target) {
     console.log(`Trying to use ${itemId} on ${target}. Document ID is ${docId}`);
     let url = `${URL_USE_ITEMS}${itemId}`;
@@ -57,14 +43,16 @@ class Items {
     rp.post({
       uri: url,
       headers: {
-        apiKey: '82af0283-6a48-4398-82c0-4cbc0217dc66'
+        apiKey: config.apiKey
       }
     })
     .then(response => {
+      console.log('Used item successfully');
       console.log(util.inspect(response, false, null));
       this.deleteItem(docId);
     })
     .catch(err => {
+      console.log('there was an error trying to use item');
       console.log(err);
     });
   }

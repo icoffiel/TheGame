@@ -3,3 +3,9 @@ node_modules/
 
 # Bower
 src/webapp/bower_components/
+
+# Database
+db/items.db
+
+# Configuration
+config/*.config

@@ -1,6 +1,15 @@
 <h1>Items</h1>
 <h2>Count: {{ctrl.items.total_rows}}</h2>
 
+<div>
+  Combos:
+  Varia Suit, 7777 (7) x Mushroom (x 2) Warthog (x 2) Moogle (x 3) Rush the Dog (x 10) = 840
+
+  Other Helpful:
+  Bullet Bills
+  Morph Balls
+</div>
+
 <form>
   <div class="form-group">
     <div class="input-group">
@@ -37,7 +46,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="item in ctrl.items.rows | orderBy:ctrl.sortType:ctrl.sortReverse | filter:ctrl.searchText">
+    <!-- TODO Change this to a filter function that splits by comma. Then we can filter for good items just by changing ctrl.searchText !-->
+    <tr ng-repeat="item in ctrl.items.rows | orderBy:ctrl.sortType:ctrl.sortReverse | filter:ctrl.search(ctrl.searchText)">
       <td>{{item.doc.Name}}</td>
       <td>{{item.doc.Description}}</td>
       <td>{{item.doc.Rarity}}</td>
