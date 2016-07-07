@@ -5,7 +5,7 @@ node_modules/
 src/webapp/bower_components/
 
 # Database
-db/items.db
+db/items.*
 
 # Configuration
 config/*.js
