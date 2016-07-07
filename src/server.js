@@ -25,7 +25,10 @@ class GameServer {
       res.redirect('/index.html');
     });
     this.app.get('/api/items', (req, res) => {
-      res.send(this.items._allItems);
+        this.items.getAllItems()
+        .then(response => {
+          res.send(response);
+        });
     });
     this.app.get('/api/leaderboard', (req, res) => {
       res.send(this.leaderboard._leaderBoard);

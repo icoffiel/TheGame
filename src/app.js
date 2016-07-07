@@ -4,14 +4,12 @@ let Effects = require('./Effects');
 let Items = require('./Items');
 let Express = require('./server.js');
 
-// TODO Implement a FE
-
 class App {
   constructor() {
-    this.points = new Points();
     this.leaderBoard = new LeaderBoard();
     this.effects = new Effects();
     this.items = new Items(this.leaderBoard);
+    this.points = new Points(this.items);
     this.server = new Express(this.items, this.leaderBoard);
   }
 

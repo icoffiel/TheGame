@@ -1,26 +1,25 @@
 var rp = require('request-promise');
 var util = require('util');
 var Items = require('./Items');
+let config = require('../config/api');
 
 const TIMEOUT = 1100;
 
 class Points {
 
-  constructor() {
-    this.itemsUtil = new Items();
-    this.points = {
-      method: 'POST',
-      uri: 'http://thegame.nerderylabs.com/points',
-      headers: {
-        'apikey': '***REMOVED***-***REMOVED***-***REMOVED***-***REMOVED***-***REMOVED***'
-      },
-      timeout: 60000,
-      json: true
-    };
+  constructor(items) {
+    this.itemsUtil = items;
   }
 
   getPoints() {
-    return rp(this.points)
+    return rp.post({
+      uri: 'http://thegame.nerderylabs.com/points',
+      headers: {
+        'apikey': config.apiKey
+      },
+      timeout: 60000,
+      json: true
+    })
       .then(parsedBody => {
         console.log(util.inspect(parsedBody, false, null));
         if(parsedBody.Item !== null){
