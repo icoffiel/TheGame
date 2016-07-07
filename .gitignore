@@ -8,4 +8,4 @@ src/webapp/bower_components/
 db/items.db
 
 # Configuration
-config/*.config
+config/*.js
