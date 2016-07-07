@@ -1,0 +1,47 @@
+<h1>Items</h1>
+<h2>Count: {{ctrl.items.total_rows}}</h2>
+
+<form>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+      <input type="text" class="form-control" placeholder="Search text" ng-model="ctrl.searchText">
+    </div>
+  </div>
+</form>
+
+<table class="table table-condensed table-hover">
+  <thead>
+    <tr>
+      <td>
+        <a href="#" ng-click="ctrl.sortType = 'doc.Name'; ctrl.sortReverse = !ctrl.sortReverse">
+          Name
+          <span ng-show="ctrl.sortType == 'doc.Name' && ctrl.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+          <span ng-show="ctrl.sortType == 'doc.Name' && !ctrl.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+        </a>
+      </td>
+      <td>
+        <a href="#" ng-click="ctrl.sortType = 'doc.Description'; ctrl.sortReverse = !ctrl.sortReverse">
+          Description
+          <span ng-show="ctrl.sortType == 'doc.Description' && ctrl.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+          <span ng-show="ctrl.sortType == 'doc.Description' && !ctrl.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+        </a>
+      </td>
+      <td>
+        <a href="#" ng-click="ctrl.sortType = 'doc.Rarity'; ctrl.sortReverse = !ctrl.sortReverse">
+          Rarity
+          <span ng-show="ctrl.sortType == 'doc.Rarity' && ctrl.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+          <span ng-show="ctrl.sortType == 'doc.Rarity' && !ctrl.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+        </a>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="item in ctrl.items.rows | orderBy:ctrl.sortType:ctrl.sortReverse | filter:ctrl.searchText">
+      <td>{{item.doc.Name}}</td>
+      <td>{{item.doc.Description}}</td>
+      <td>{{item.doc.Rarity}}</td>
+      <td><a href="#" class="btn btn-primary" role="button" ng-click="ctrl.useItem(item.doc)">Apply</a></td>
+    </tr>
+  </tbody>
+</table>
