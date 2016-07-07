@@ -9,6 +9,9 @@
   "author": "Iain",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "multer": "^1.1.0",
     "pouchdb": "^5.4.5",
     "request-promise": "^3.0.0",
     "sqldown": "^2.1.0",

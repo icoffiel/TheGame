@@ -1,22 +1,21 @@
 var PouchDB = require('pouchdb');
 var util = require('util');
+var rp = require('request-promise');
 
 const URL_USE_ITEMS = "http://thegame.nerderylabs.com/items/use/";
 
 const ATTACK_ITEMS = [
 
-]
+];
 
 class Items {
   constructor(leaderBoardUtil) {
     this.db = new PouchDB('../items', { db: require('sqldown') });
-    this.getAllItems()
-      .then(response => {
-        console.log('Retrieved Items from the db');
-        this._allItems = response;
-      });
+    this._allItems = [];
 
     this.leaderBoard = leaderBoardUtil;
+
+    this.getAllItemsRunner();
   }
 
   saveItem(item) {
@@ -35,21 +34,49 @@ class Items {
     });
   }
 
-  useItem(itemId, target) {
+  getAllItemsRunner() {
+    this.getAllItems()
+    .then(response => {
+      this._allItems = response;
+      setTimeout(() => this.getAllItemsRunner(), 2000);
+    })
+    .catch((err) => {
+      console.log(err);
+      setTimeout(() => this.getAllItemsRunner(), 2000);
+    });
+  }
+
+  useItem(docId, itemId, target) {
+    console.log(`Trying to use ${itemId} on ${target}. Document ID is ${docId}`);
     let url = `${URL_USE_ITEMS}${itemId}`;
 
     if(target){
       url += `?target=${target}`;
     }
 
-    request.post({
-      url,
+    rp.post({
+      uri: url,
       headers: {
         apiKey: '***REMOVED***-***REMOVED***-***REMOVED***-***REMOVED***-***REMOVED***'
       }
     })
     .then(response => {
       console.log(util.inspect(response, false, null));
+      this.deleteItem(docId);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+
+  deleteItem(docId) {
+    this.db.get(docId)
+    .then(doc => {
+      return this.db.remove(doc);
+    })
+    .then(result => {
+      console.log(`Deleted ${docId} successfully`);
+      console.log(result);
     })
     .catch(err => {
       console.log(err);

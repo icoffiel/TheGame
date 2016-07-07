@@ -21,7 +21,6 @@ class LeaderBoard {
   retrieveLeaderBoard() {
     return rp.get(this.leaderBoardOpts)
       .then(parsedBody => {
-        console.log('Retrieved leaderboard!');
         this._leaderBoard = parsedBody;
       })
       .catch(err => {
@@ -32,13 +31,13 @@ class LeaderBoard {
   getLeaderBoardRunner() {
     this.retrieveLeaderBoard()
       .finally(() => {
-        setTimeout(() => this.getLeaderBoardRunner(), 60000);
+        setTimeout(() => this.getLeaderBoardRunner(), 5000);
       });
   }
 
   getTarget() {
     // TODO Implement JVM filter
-    if(this._leaderBoard) {
+    if(this._leaderBoard.length > 0) {
         return this._leaderBoard[0].PlayerName;
     } else {
       return null;

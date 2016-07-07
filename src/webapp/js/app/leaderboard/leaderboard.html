@@ -1,0 +1,16 @@
+<h1>Leader Board</h1>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <td>Player Name</td>
+      <td>Points</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="player in ctrl.leaderboard">
+      <td>{{player.PlayerName}}</td>
+      <td>{{player.Points}}</td>
+      <td><a href="#" class="btn btn-primary" role="button" ng-click="ctrl.selectPlayer(player)">Select</a></td>
+    </tr>
+  </tbody>
+</table>
