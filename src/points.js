@@ -9,6 +9,7 @@ class Points {
 
   constructor(items) {
     this.itemsUtil = items;
+    this.playerDetails ={};
   }
 
   getPoints() {
@@ -22,6 +23,7 @@ class Points {
     })
       .then(parsedBody => {
         console.log(util.inspect(parsedBody, false, null));
+        this.playerDetails = parsedBody;
         if(parsedBody.Item !== null){
           return parsedBody.Item.Fields[0];
         }

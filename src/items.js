@@ -54,6 +54,10 @@ class Items {
     .catch(err => {
       console.log('there was an error trying to use item');
       console.log(err);
+      if(err.statusCode === 400) {
+        console.log('Attempting to remove the item');
+        this.deleteItem(docId);
+      }
     });
   }
 

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -13,14 +13,6 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form navbar-right">
-        <div class="form-group">
-          <div class="input-group">
-            <input type="text" class="form-control" ng-model="ctrl.target">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-flash"></span></div>
-          </div>
-        </div>
-      </form>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
@@ -28,9 +20,21 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8">
-      <items-component></items-component>
+      <player-component></player-component>
+      <div class="row">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{ctrl.countDownTimer}}" aria-valuemin="0" aria-valuemax="60" style="width: {{ctrl.countDownPercent}}%;">
+            <span class="sr-only">{{ ctrl.countDownTimer }}% Complete</span>
+          </div>
+        </div>
+      </div>
+      <items-component enable-item-use="ctrl.canUseItem"></items-component>
     </div>
     <div class="col-sm-4">
+      <div class="input-group">
+        <span class="input-group-addon">Target</span>
+        <input type="text" class="form-control" ng-model="ctrl.target">
+      </div>
       <leaderboard-component></leaderboard-component>
     </div>
   </div>

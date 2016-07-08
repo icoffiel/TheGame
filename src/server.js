@@ -2,7 +2,7 @@ let express = require('express');
 let bodyParser = require('body-parser');
 
 class GameServer {
-  constructor(gameItems, leaderboard) {
+  constructor(gameItems, leaderboard, points) {
     this.app = express();
     // Allow bopdy parsing
     // this.app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,6 +17,7 @@ class GameServer {
     // Setup external references
     this.items = gameItems;
     this.leaderboard = leaderboard;
+    this.points = points;
   }
 
   routes() {
@@ -32,6 +33,9 @@ class GameServer {
     });
     this.app.get('/api/leaderboard', (req, res) => {
       res.send(this.leaderboard._leaderBoard);
+    });
+    this.app.get('/api/player', (req, res) => {
+      res.send(this.points.playerDetails);
     });
     this.app.delete('/api/items/:itemId', this.jsonParser, (req, res) => {
       let itemId = req.params.itemId;

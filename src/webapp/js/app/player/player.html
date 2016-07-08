@@ -1,0 +1,15 @@
+<div class="row show-grid">
+  <div class="col-sm-12">
+    <h1>icoffiel
+      <small>{{ ctrl.playerDetails.Points}}</small>
+    </h1>
+    <div>
+      Effects:
+      <span ng-repeat="effect in ctrl.playerDetails.Effects"><span class="label label-primary">{{effect.EffectName}}</span> </span>
+    </div>
+    <div>
+      Badges:
+      <span ng-repeat="badge in ctrl.playerDetails.Badges"><span class="label label-info">{{badge.BadgeName}}</span> </span>
+    </div>
+  </div>
+</div>

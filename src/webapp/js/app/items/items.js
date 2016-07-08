@@ -39,6 +39,7 @@ class ItemController {
     })
       .success((data) => {
         console.log(data);
+        this.$scope.$parent.ctrl.startTimer();
         this.getAllItems();
       })
       .error((err) => {
@@ -65,6 +66,9 @@ ItemController.$inject = [
 ];
 
 ngameApp.component('itemsComponent', {
+  bindings: {
+    enableItemUse: '<'
+  },
   templateUrl: 'js/app/items/items.html',
   controller: ItemController,
   controllerAs: 'ctrl'

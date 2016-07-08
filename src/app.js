@@ -10,14 +10,12 @@ class App {
     this.effects = new Effects();
     this.items = new Items(this.leaderBoard);
     this.points = new Points(this.items);
-    this.server = new Express(this.items, this.leaderBoard);
+    this.server = new Express(this.items, this.leaderBoard, this.points);
   }
 
   start() {
     this.points.getPointsRunner();
     this.leaderBoard.getLeaderBoardRunner();
-    //this.effects.getEffectsRunner();
-    // this.items.getUseItemRunner();
   }
 }
 
