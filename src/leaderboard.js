@@ -3,7 +3,7 @@ var rp = require('request-promise');
 class LeaderBoard {
   constructor() {
     this.leaderBoardOpts = {
-      uri: 'http://thegame.nerderylabs.com',
+      uri: 'http://thegame.nerderylabs.com:1337',
       headers: {
         'Accept': 'application/json'
       },

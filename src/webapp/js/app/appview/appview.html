@@ -21,14 +21,8 @@
   <div class="row">
     <div class="col-sm-8">
       <player-component></player-component>
-      <div class="row">
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" aria-valuenow="{{ctrl.countDownTimer}}" aria-valuemin="0" aria-valuemax="60" style="width: {{ctrl.countDownPercent}}%;">
-            <span class="sr-only">{{ ctrl.countDownTimer }}% Complete</span>
-          </div>
-        </div>
-      </div>
-      <items-component enable-item-use="ctrl.canUseItem"></items-component>
+      <item-queue-component queue="ctrl.queue"></item-queue-component>
+      <items-component queue="ctrl.queue" target="ctrl.target"></items-component>
     </div>
     <div class="col-sm-4">
       <div class="input-group">

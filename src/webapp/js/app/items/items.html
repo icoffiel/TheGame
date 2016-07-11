@@ -51,11 +51,11 @@
   </thead>
   <tbody>
     <!-- TODO Change this to a filter function that splits by comma. Then we can filter for good items just by changing ctrl.searchText !-->
-    <tr ng-repeat="item in ctrl.items.rows | orderBy:ctrl.sortType:ctrl.sortReverse | filter:ctrl.search(ctrl.searchText)">
+    <tr ng-repeat="item in ctrl.items.rows | orderBy:ctrl.sortType:ctrl.sortReverse | filter:ctrl.search(ctrl.searchText)" ng-class="{ 'danger': ctrl.inQueue(item) }">
       <td>{{item.doc.Name}}</td>
       <td>{{item.doc.Description}}</td>
       <td>{{item.doc.Rarity}}</td>
-      <td><a href="#" class="btn btn-primary" role="button" ng-click="ctrl.useItem(item.doc)" ng-disable="!ctrl.enableItemUse">Apply</a></td>
+      <td><a class="btn btn-primary" role="button" ng-click="ctrl.useItem(item.doc)">Apply</a></td>
     </tr>
   </tbody>
 </table>

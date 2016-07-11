@@ -1,7 +1,7 @@
 var rp = require('request-promise');
 
 const TIMEOUT = 600000;
-const URL_EFFECTS = 'http://thegame.nerderylabs.com/effects';
+const URL_EFFECTS = 'http://thegame.nerderylabs.com:1337/effects';
 
 const ATTACK_ITEMS = [
   'Banana Peel',

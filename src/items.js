@@ -3,7 +3,7 @@ var util = require('util');
 var rp = require('request-promise');
 let config = require('../config/api');
 
-const URL_USE_ITEMS = "http://thegame.nerderylabs.com/items/use/";
+const URL_USE_ITEMS = "http://thegame.nerderylabs.com:1337/items/use/";
 
 const ATTACK_ITEMS = [
 

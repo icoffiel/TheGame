@@ -22,29 +22,14 @@ class ItemController {
 
   getAllItemsPoller() {
     this.getAllItems()
-    .finally(() => {
-      setTimeout(() => this.getAllItemsPoller(), 10000);
-    });
+    .finally(() => setTimeout(() => this.getAllItemsPoller(), 10000));
   }
 
   useItem(item) {
-    this.$http.delete(`/api/items/${item.Id}`, {
-      data: {
-        target: this.$scope.$parent.ctrl.target,
-        docId: item._id
-      },
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .success((data) => {
-        console.log(data);
-        this.$scope.$parent.ctrl.startTimer();
-        this.getAllItems();
-      })
-      .error((err) => {
-        console.log(err);
-      });
+    this.queue.push({
+      item: item,
+      target: this.target || 'icoffiel'
+    });
   }
 
   search(criteria) {
@@ -58,6 +43,12 @@ class ItemController {
       }
     });
   }
+
+  inQueue(item) {
+    if(this.queue.filter(row => row.item.Id === item.doc.Id).length) {
+      return true;
+    }
+  }
 }
 
 ItemController.$inject = [
@@ -67,7 +58,9 @@ ItemController.$inject = [
 
 ngameApp.component('itemsComponent', {
   bindings: {
-    enableItemUse: '<'
+    enableItemUse: '<',
+    queue: '=',
+    target: '<'
   },
   templateUrl: 'js/app/items/items.html',
   controller: ItemController,

@@ -14,7 +14,7 @@ class Points {
 
   getPoints() {
     return rp.post({
-      uri: 'http://thegame.nerderylabs.com/points',
+      uri: 'http://thegame.nerderylabs.com:1337/points',
       headers: {
         'apikey': config.apiKey
       },

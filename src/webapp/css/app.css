@@ -5,3 +5,10 @@ body {
 .show-grid {
   padding-bottom: 10px;
 }
+
+.progress span {
+    position: absolute;
+    display: block;
+    width: 100%;
+    color: black;
+ }
