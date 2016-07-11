@@ -1,1 +1,3 @@
-let ngameApp = angular.module('ngameApp', []);
+let ngameApp = angular.module('ngameApp', [
+  
+]);

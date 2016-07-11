@@ -47,14 +47,22 @@
           <span ng-show="ctrl.sortType == 'doc.Rarity' && !ctrl.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
         </a>
       </td>
+      <td>
+        <a href="#" ng-click="ctrl.sortType = 'doc.timestamp'; ctrl.sortReverse = !ctrl.sortReverse">
+          Timestamp
+          <span ng-show="ctrl.sortType == 'doc.timestamp' && ctrl.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+          <span ng-show="ctrl.sortType == 'doc.timestamp' && !ctrl.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+        </a>
+      </td>
     </tr>
   </thead>
   <tbody>
     <!-- TODO Change this to a filter function that splits by comma. Then we can filter for good items just by changing ctrl.searchText !-->
-    <tr ng-repeat="item in ctrl.items.rows | orderBy:ctrl.sortType:ctrl.sortReverse | filter:ctrl.search(ctrl.searchText)" ng-class="{ 'danger': ctrl.inQueue(item) }">
+    <tr ng-repeat="item in ctrl.items.rows | orderBy:ctrl.sortType:ctrl.sortReverse | filter:ctrl.search(ctrl.searchText)" ng-class="{ 'danger': ctrl.inQueue(item), 'warning': ctrl.isExpired(item) }">
       <td>{{item.doc.Name}}</td>
       <td>{{item.doc.Description}}</td>
       <td>{{item.doc.Rarity}}</td>
+      <td>{{item.doc.timestamp | date:'medium'}}</td>
       <td><a class="btn btn-primary" role="button" ng-click="ctrl.useItem(item.doc)">Apply</a></td>
     </tr>
   </tbody>

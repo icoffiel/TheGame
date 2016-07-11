@@ -49,6 +49,10 @@ class ItemController {
       return true;
     }
   }
+
+  isExpired(item) {
+    return moment(item.doc.timestamp) < moment().subtract(48, 'hours');
+  }
 }
 
 ItemController.$inject = [

@@ -30,6 +30,7 @@ class Points {
       })
       .then(item => {
         if (item) {
+          Object.assign(item, { timestamp: new Date() });
           this.itemsUtil.saveItem(item);
         }
       })
